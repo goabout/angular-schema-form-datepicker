@@ -19,13 +19,18 @@ angular.module('schemaForm').directive('pickADateTime', function () {
         pickADateTime.$$date = momentDateTime.format('YYYY-MM-DD');
         pickADateTime.$$time = momentDateTime.format('HH-mm');
       } else {
-        momentDateTime = moment().hours('00').minutes('00');
+        momentDateTime = moment.utc().hours('00').minutes('00');
       }
 
       scope.$watch('pickADateTime.$$date', function(value) {
         if (value) {
-          var date = moment(value);
-          momentDateTime.year(date.year()).month(date.month()).day(date.day());
+          var date = moment(value, 'YYYY-MM-DD');
+          
+          momentDateTime
+          .year(date.year())
+          .month(date.month())
+          .date(date.date());
+
           scope.ngModel = momentDateTime.toISOString();
         }
       })

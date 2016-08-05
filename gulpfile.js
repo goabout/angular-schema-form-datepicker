@@ -154,12 +154,12 @@ gulp.task('minify', function() {
   var stream = streamqueue({objectMode: true});
   stream.queue(
               gulp.src('./src/*.html')
-                  .pipe(minifyHtml({
+                  .pipe(plugins.minifyHtml({
                     empty: true,
                     spare: true,
                     quotes: true
                   }))
-                  .pipe(templateCache({
+                  .pipe(plugins.angularTemplatecache({
                     module: 'schemaForm',
                     root: 'directives/decorators/bootstrap/datepicker/'
                   }))
@@ -167,8 +167,8 @@ gulp.task('minify', function() {
   stream.queue(gulp.src('./src/*.js'));
 
   stream.done()
-        .pipe(concat('bootstrap-datepicker.min.js'))
-        .pipe(uglify())
+        .pipe(plugins.concat('bootstrap-datepicker.min.js'))
+        .pipe(plugins.uglify())
         .pipe(gulp.dest('.'));
 
 });
@@ -177,7 +177,7 @@ gulp.task('non-minified-dist', function() {
   var stream = streamqueue({objectMode: true});
   stream.queue(
               gulp.src('./src/*.html')
-                  .pipe(templateCache({
+                  .pipe(plugins.angularTemplatecache({
                     module: 'schemaForm',
                     root: 'directives/decorators/bootstrap/datepicker/'
                   }))
@@ -185,7 +185,7 @@ gulp.task('non-minified-dist', function() {
   stream.queue(gulp.src('./src/*.js'));
 
   stream.done()
-        .pipe(concat('bootstrap-datepicker.js'))
+        .pipe(plugins.concat('bootstrap-datepicker.js'))
         .pipe(gulp.dest('.'));
 
 });

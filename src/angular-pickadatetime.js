@@ -19,7 +19,7 @@ angular.module('schemaForm').directive('pickADateTime', function () {
         scope.pickADateTime.$$date = momentDateTime.format('YYYY-MM-DD');
         scope.pickADateTime.$$time = momentDateTime.format('HH:mm');
       } else {
-        momentDateTime = moment.utc().hours('00').minutes('00');
+        momentDateTime = moment.hours('00').minutes('00');
       }
 
       scope.$watch('pickADateTime.$$date', function(value) {
@@ -30,8 +30,7 @@ angular.module('schemaForm').directive('pickADateTime', function () {
           .year(date.year())
           .month(date.month())
           .date(date.date());
-
-          scope.ngModel = momentDateTime.toISOString();
+          scope.ngModel = momentDateTime.format('YYYY-MM-DDTHH:mm:ssZ');
         }
       })
 
@@ -39,7 +38,7 @@ angular.module('schemaForm').directive('pickADateTime', function () {
         if (value) {
           var time = value.split(':')
           momentDateTime.hours(time[0]).minutes(time[1]);
-          scope.ngModel = momentDateTime.toISOString();
+          scope.ngModel = momentDateTime.format('YYYY-MM-DDTHH:mm:ssZ');
         }
       })
     }

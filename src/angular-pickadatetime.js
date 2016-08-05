@@ -16,8 +16,8 @@ angular.module('schemaForm').directive('pickADateTime', function () {
       //Init
       if (scope.ngModel && moment(scope.ngModel).isValid()) {
         momentDateTime = moment(scope.ngModel);
-        pickADateTime.$$date = momentDateTime.format('YYYY-MM-DD');
-        pickADateTime.$$time = momentDateTime.format('HH-mm');
+        scope.pickADateTime.$$date = momentDateTime.format('YYYY-MM-DD');
+        scope.pickADateTime.$$time = momentDateTime.format('HH:mm');
       } else {
         momentDateTime = moment.utc().hours('00').minutes('00');
       }

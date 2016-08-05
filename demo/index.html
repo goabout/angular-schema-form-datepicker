@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+  <head>
+
+    <meta charset="utf-8" />
+    <base href="/" />
+    <meta name="fragment" content="!" />
+    
+    <title>Demo form</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+
+    <link href="./vendor.css" type="text/css" rel="stylesheet" />
+    <link href="./demo.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+
+    <div ng-controller="DemoController" class="body">
+        <h1>Form</h1>
+
+
+        <form sf-schema="propertySchema" sf-form="propertyForm" sf-model="propertyModel" ng-model="propertyModel"></form>
+
+        <h5>Model</h5>
+        {{ propertyModel }}
+
+    </div>
+
+    <script src="./vendor.js" ></script>
+    <script src="./source.js" ></script>
+    <script src="./demo.js" ></script>
+  </body>
+</html>

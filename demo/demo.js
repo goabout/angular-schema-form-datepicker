@@ -49,12 +49,12 @@ angular.module('demo', [
         "type": "checkbox"
       }
     ],
-    required: [ "amount" ]
+    required: [ "amount", "date", "dateTime", "time" ]
   }
 
   $scope.propertyForm = $scope.propertySchema.form
 
   $scope.propertyModel = {
-    "amount":5,"insurance":false,"dateTime":"2016-08-10T13:30:25.089Z","time":"13:00"}
+    "amount":5,"insurance":false,"time":"13:00", "date": "2016-08-10", "dateTime":"2016-08-10T11:30:08+03:00"}
 
 })

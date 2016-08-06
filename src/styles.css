@@ -1,0 +1,8 @@
+.form-group.required .control-label:after, .form-group.required>label:after {
+  content:"*";
+  color:red;
+}
+
+.form-control-feedback.form-control-above-field {
+  top: -8px;
+}

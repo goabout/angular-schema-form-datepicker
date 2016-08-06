@@ -1,4 +1,4 @@
-<div class="form-group {{form.htmlClass}}" ng-class="{'has-error': hasError()}" pick-a-date-time="form" ng-model="$$value$$ ">
+<div class="form-group schema-form-{{form.type}} {{form.htmlClass}}" ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false, 'required': isRequired()}" pick-a-date-time="form" ng-model="$$value$$ ">
   <label class="control-label" ng-show="showTitle()">{{form.title}}</label>
   <div ng-class="{'input-group': (form.fieldAddonLeft || form.fieldAddonRight)}">
     <div class="row">
@@ -10,7 +10,6 @@
                style="background-color: white"
                type="text"
                class="form-control {{form.fieldHtmlClass}}"
-               schema-validate="form"
                ng-model="form.$$date"
                ng-disabled="form.readonly"
                pick-a-date="form.pickadate"
@@ -30,7 +29,6 @@
                style="background-color: white"
                type="text"
                class="form-control {{form.fieldHtmlClass}}"
-               schema-validate="form"
                ng-model="form.$$time"
                ng-disabled="form.readonly"
                pick-a-time="form.pickatime"
@@ -42,7 +40,14 @@
               class="input-group-addon"
               ng-bind-html="form.fieldAddonRight"></span>
       </div>
+
+      <span ng-if="form.feedback !== false"
+          class="form-control-feedback form-control-above-field"
+          ng-class="evalInScope(form.feedback) || {'glyphicon': true, 'glyphicon-ok': hasSuccess(), 'glyphicon-remove': hasError() }"></span>
     </div>
+
+    <!-- Input with both values combined so default validation divective can be used -->
+    <input class="hidden" schema-validate="form" ng-model="$$value$$" name="{{form.key.slice(-1)[0]}}">
   </div>
     
   <span class="help-block">{{ (hasError() && errorMessage(schemaError())) || form.description}}</span>

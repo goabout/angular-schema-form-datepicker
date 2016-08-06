@@ -12,14 +12,18 @@ angular.module('schemaForm').directive('pickADateTime', function () {
     },
     link: function (scope, element, attrs) {
       var momentDateTime = null;
+      var timeSet = false;
+      var dateSet = false;
 
       //Init
       if (scope.ngModel && moment(scope.ngModel).isValid()) {
         momentDateTime = moment(scope.ngModel);
         scope.pickADateTime.$$date = momentDateTime.format('YYYY-MM-DD');
         scope.pickADateTime.$$time = momentDateTime.format('HH:mm');
+        timeSet = true;
+        dateSet = true;
       } else {
-        momentDateTime = moment.hours('00').minutes('00');
+        momentDateTime = moment().hours('00').minutes('00');
       }
 
       scope.$watch('pickADateTime.$$date', function(value) {
@@ -30,7 +34,11 @@ angular.module('schemaForm').directive('pickADateTime', function () {
           .year(date.year())
           .month(date.month())
           .date(date.date());
-          scope.ngModel = momentDateTime.format('YYYY-MM-DDTHH:mm:ssZ');
+
+          dateSet = true
+          setDateTime()
+        } else {
+          clearBothValues()
         }
       })
 
@@ -38,9 +46,29 @@ angular.module('schemaForm').directive('pickADateTime', function () {
         if (value) {
           var time = value.split(':')
           momentDateTime.hours(time[0]).minutes(time[1]);
-          scope.ngModel = momentDateTime.format('YYYY-MM-DDTHH:mm:ssZ');
+          timeSet = true
+          setDateTime()
+        } else {
+          clearBothValues()
         }
       })
+
+      function clearBothValues() {
+        timeSet = false
+        dateSet = false
+        scope.ngModel = undefined
+        momentDateTime = moment().hours('00').minutes('00');
+        scope.pickADateTime.$$date = undefined
+        scope.pickADateTime.$$time = undefined
+        scope.$emit('schemaFormValidate')
+      }
+
+      function setDateTime() {
+        if (timeSet && dateSet) {
+          scope.ngModel = momentDateTime.format('YYYY-MM-DDTHH:mm:ssZ');
+        }
+        scope.$emit('schemaFormValidate')
+      }
     }
   };
 

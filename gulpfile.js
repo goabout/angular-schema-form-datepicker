@@ -42,8 +42,8 @@ var opt = {
     //Schema form requirements
     './bower_components/tv4/tv4.js',
     './bower_components/objectpath/lib/ObjectPath.js',
-    './bower_components/angular-schema-form/dist/schema-form.js',
-    './bower_components/angular-schema-form/dist/bootstrap-decorator.js',
+    './bower_components/angular-schema-form/dist/schema-form.min.js',
+    './bower_components/angular-schema-form/dist/bootstrap-decorator.min.js',
   ],
   VENDOR_SCRIPTS_FILENAME: 'vendor.js',
 
@@ -53,6 +53,7 @@ var opt = {
   './bower_components/pickadate/lib/compressed/themes/classic.css',
   './bower_components/pickadate/lib/compressed/themes/classic.date.css',
   './bower_components/pickadate/lib/compressed/themes/classic.time.css',
+  './src/styles.css'
   ],
   DEMO_STYLES: 'demo/demo.css',
   VENDOR_STYLES_FILENAME: 'vendor.css',

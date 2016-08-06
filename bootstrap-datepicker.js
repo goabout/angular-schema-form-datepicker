@@ -1,6 +1,6 @@
-angular.module("schemaForm").run(["$templateCache", function($templateCache) {$templateCache.put("directives/decorators/bootstrap/datepicker/datepicker.html","<div class=\"form-group {{form.htmlClass}}\" ng-class=\"{\'has-error\': hasError()}\">\n  <label class=\"control-label\" ng-show=\"showTitle()\">{{form.title}}</label>\n  <div ng-class=\"{\'input-group\': (form.fieldAddonLeft || form.fieldAddonRight)}\">\n    <span ng-if=\"form.fieldAddonLeft\"\n          class=\"input-group-addon\"\n          ng-bind-html=\"form.fieldAddonLeft\"></span>\n    <input ng-show=\"form.key\"\n           style=\"background-color: white\"\n           type=\"text\"\n           class=\"form-control {{form.fieldHtmlClass}}\"\n           schema-validate=\"form\"\n           ng-model=\"$$value$$\"\n           ng-disabled=\"form.readonly\"\n           pick-a-date=\"form.pickadate\"\n           min-date=\"form.minDate\"\n           max-date=\"form.maxDate\"\n           name=\"{{form.key.slice(-1)[0]}}\"\n           format=\"form.format\" />\n    <span ng-if=\"form.fieldAddonRight\"\n          class=\"input-group-addon\"\n          ng-bind-html=\"form.fieldAddonRight\"></span>\n  </div>\n  <span class=\"help-block\">{{ (hasError() && errorMessage(schemaError())) || form.description}}</span>\n</div>\n");
-$templateCache.put("directives/decorators/bootstrap/datepicker/datetimepicker.html","<div class=\"form-group {{form.htmlClass}}\" ng-class=\"{\'has-error\': hasError()}\" pick-a-date-time=\"form\" ng-model=\"$$value$$ \">\n  <label class=\"control-label\" ng-show=\"showTitle()\">{{form.title}}</label>\n  <div ng-class=\"{\'input-group\': (form.fieldAddonLeft || form.fieldAddonRight)}\">\n    <div class=\"row\">\n      <div class=\"col-xs-12 col-sm-8\">\n        <span ng-if=\"form.fieldAddonLeft\"\n              class=\"input-group-addon\"\n              ng-bind-html=\"form.fieldAddonLeft\"></span>\n        <input ng-show=\"form.key\"\n               style=\"background-color: white\"\n               type=\"text\"\n               class=\"form-control {{form.fieldHtmlClass}}\"\n               schema-validate=\"form\"\n               ng-model=\"form.$$date\"\n               ng-disabled=\"form.readonly\"\n               pick-a-date=\"form.pickadate\"\n               min-date=\"form.minDate\"\n               max-date=\"form.maxDate\"\n               name=\"{{form.key.slice(-1)[0]}}\"\n               format=\"form.format\" />\n        <span ng-if=\"form.fieldAddonRight\"\n              class=\"input-group-addon\"\n              ng-bind-html=\"form.fieldAddonRight\"></span>\n      </div>\n      <div class=\"col-xs-12 col-sm-4\">\n        <span ng-if=\"form.fieldAddonLeft\"\n              class=\"input-group-addon\"\n              ng-bind-html=\"form.fieldAddonLeft\"></span>\n        <input ng-show=\"form.key\"\n               style=\"background-color: white\"\n               type=\"text\"\n               class=\"form-control {{form.fieldHtmlClass}}\"\n               schema-validate=\"form\"\n               ng-model=\"form.$$time\"\n               ng-disabled=\"form.readonly\"\n               pick-a-time=\"form.pickatime\"\n               min-time=\"form.minTime\"\n               max-time=\"form.maxTime\"\n               name=\"{{form.key.slice(-1)[0]}}\"\n               format=\"form.format\" />\n        <span ng-if=\"form.fieldAddonRight\"\n              class=\"input-group-addon\"\n              ng-bind-html=\"form.fieldAddonRight\"></span>\n      </div>\n    </div>\n  </div>\n    \n  <span class=\"help-block\">{{ (hasError() && errorMessage(schemaError())) || form.description}}</span>\n</div>\n");
-$templateCache.put("directives/decorators/bootstrap/datepicker/timepicker.html","<div class=\"form-group {{form.htmlClass}}\" ng-class=\"{\'has-error\': hasError()}\">\n  <label class=\"control-label\" ng-show=\"showTitle()\">{{form.title}}</label>\n  <div ng-class=\"{\'input-group\': (form.fieldAddonLeft || form.fieldAddonRight)}\">\n    <span ng-if=\"form.fieldAddonLeft\"\n          class=\"input-group-addon\"\n          ng-bind-html=\"form.fieldAddonLeft\"></span>\n    <input ng-show=\"form.key\"\n           style=\"background-color: white\"\n           type=\"text\"\n           class=\"form-control {{form.fieldHtmlClass}}\"\n           schema-validate=\"form\"\n           ng-model=\"$$value$$\"\n           ng-disabled=\"form.readonly\"\n           pick-a-time=\"form.pickatime\"\n           min-time=\"form.minTime\"\n           max-time=\"form.maxTime\"\n           name=\"{{form.key.slice(-1)[0]}}\"\n           format=\"form.format\" />\n    <span ng-if=\"form.fieldAddonRight\"\n          class=\"input-group-addon\"\n          ng-bind-html=\"form.fieldAddonRight\"></span>\n  </div>\n  <span class=\"help-block\">{{ (hasError() && errorMessage(schemaError())) || form.description}}</span>\n</div>\n");}]);
+angular.module("schemaForm").run(["$templateCache", function($templateCache) {$templateCache.put("directives/decorators/bootstrap/datepicker/datepicker.html","<div class=\"form-group schema-form-{{form.type}} {{form.htmlClass}}\" ng-class=\"{\'has-error\': form.disableErrorState !== true && hasError(), \'has-success\': form.disableSuccessState !== true && hasSuccess(), \'has-feedback\': form.feedback !== false, \'required\': isRequired()}\">\n  <label class=\"control-label\" ng-show=\"showTitle()\">{{form.title}}</label>\n\n  <div ng-class=\"{\'input-group\': (form.fieldAddonLeft || form.fieldAddonRight)}\">\n    <span ng-if=\"form.fieldAddonLeft\"\n          class=\"input-group-addon\"\n          ng-bind-html=\"form.fieldAddonLeft\"></span>\n    <input ng-show=\"form.key\"\n           style=\"background-color: white\"\n           type=\"text\"\n           class=\"form-control {{form.fieldHtmlClass}}\"\n           schema-validate=\"form\"\n           ng-model=\"$$value$$\"\n           ng-disabled=\"form.readonly\"\n           pick-a-date=\"form.pickadate\"\n           min-date=\"form.minDate\"\n           max-date=\"form.maxDate\"\n           name=\"{{form.key.slice(-1)[0]}}\"\n           format=\"form.format\" />\n    <span ng-if=\"form.fieldAddonRight\"\n          class=\"input-group-addon\"\n          ng-bind-html=\"form.fieldAddonRight\"></span>\n  </div>\n\n  <span ng-if=\"form.feedback !== false\"\n      class=\"form-control-feedback\"\n      ng-class=\"evalInScope(form.feedback) || {\'glyphicon\': true, \'glyphicon-ok\': hasSuccess(), \'glyphicon-remove\': hasError() }\"></span>\n\n  <span class=\"help-block\">{{ (hasError() && errorMessage(schemaError())) || form.description}}</span>\n</div>\n");
+$templateCache.put("directives/decorators/bootstrap/datepicker/datetimepicker.html","<div class=\"form-group schema-form-{{form.type}} {{form.htmlClass}}\" ng-class=\"{\'has-error\': form.disableErrorState !== true && hasError(), \'has-success\': form.disableSuccessState !== true && hasSuccess(), \'has-feedback\': form.feedback !== false, \'required\': isRequired()}\" pick-a-date-time=\"form\" ng-model=\"$$value$$ \">\n  <label class=\"control-label\" ng-show=\"showTitle()\">{{form.title}}</label>\n  <div ng-class=\"{\'input-group\': (form.fieldAddonLeft || form.fieldAddonRight)}\">\n    <div class=\"row\">\n      <div class=\"col-xs-12 col-sm-8\">\n        <span ng-if=\"form.fieldAddonLeft\"\n              class=\"input-group-addon\"\n              ng-bind-html=\"form.fieldAddonLeft\"></span>\n        <input ng-show=\"form.key\"\n               style=\"background-color: white\"\n               type=\"text\"\n               class=\"form-control {{form.fieldHtmlClass}}\"\n               ng-model=\"form.$$date\"\n               ng-disabled=\"form.readonly\"\n               pick-a-date=\"form.pickadate\"\n               min-date=\"form.minDate\"\n               max-date=\"form.maxDate\"\n               name=\"{{form.key.slice(-1)[0]}}\"\n               format=\"form.format\" />\n        <span ng-if=\"form.fieldAddonRight\"\n              class=\"input-group-addon\"\n              ng-bind-html=\"form.fieldAddonRight\"></span>\n      </div>\n      <div class=\"col-xs-12 col-sm-4\">\n        <span ng-if=\"form.fieldAddonLeft\"\n              class=\"input-group-addon\"\n              ng-bind-html=\"form.fieldAddonLeft\"></span>\n        <input ng-show=\"form.key\"\n               style=\"background-color: white\"\n               type=\"text\"\n               class=\"form-control {{form.fieldHtmlClass}}\"\n               ng-model=\"form.$$time\"\n               ng-disabled=\"form.readonly\"\n               pick-a-time=\"form.pickatime\"\n               min-time=\"form.minTime\"\n               max-time=\"form.maxTime\"\n               name=\"{{form.key.slice(-1)[0]}}\"\n               format=\"form.format\" />\n        <span ng-if=\"form.fieldAddonRight\"\n              class=\"input-group-addon\"\n              ng-bind-html=\"form.fieldAddonRight\"></span>\n      </div>\n\n      <span ng-if=\"form.feedback !== false\"\n          class=\"form-control-feedback form-control-above-field\"\n          ng-class=\"evalInScope(form.feedback) || {\'glyphicon\': true, \'glyphicon-ok\': hasSuccess(), \'glyphicon-remove\': hasError() }\"></span>\n    </div>\n\n    <!-- Input with both values combined so default validation divective can be used -->\n    <input class=\"hidden\" schema-validate=\"form\" ng-model=\"$$value$$\" name=\"{{form.key.slice(-1)[0]}}\">\n  </div>\n    \n  <span class=\"help-block\">{{ (hasError() && errorMessage(schemaError())) || form.description}}</span>\n</div>\n");
+$templateCache.put("directives/decorators/bootstrap/datepicker/timepicker.html","<div class=\"form-group schema-form-{{form.type}} {{form.htmlClass}}\" ng-class=\"{\'has-error\': form.disableErrorState !== true && hasError(), \'has-success\': form.disableSuccessState !== true && hasSuccess(), \'has-feedback\': form.feedback !== false, \'required\': isRequired()}\">\n  <label class=\"control-label\" ng-show=\"showTitle()\">{{form.title}}</label>\n  <div ng-class=\"{\'input-group\': (form.fieldAddonLeft || form.fieldAddonRight)}\">\n    <span ng-if=\"form.fieldAddonLeft\"\n          class=\"input-group-addon\"\n          ng-bind-html=\"form.fieldAddonLeft\"></span>\n    <input ng-show=\"form.key\"\n           style=\"background-color: white\"\n           type=\"text\"\n           class=\"form-control {{form.fieldHtmlClass}}\"\n           schema-validate=\"form\"\n           ng-model=\"$$value$$\"\n           ng-disabled=\"form.readonly\"\n           pick-a-time=\"form.pickatime\"\n           min-time=\"form.minTime\"\n           max-time=\"form.maxTime\"\n           name=\"{{form.key.slice(-1)[0]}}\"\n           format=\"form.format\" />\n    <span ng-if=\"form.fieldAddonRight\"\n          class=\"input-group-addon\"\n          ng-bind-html=\"form.fieldAddonRight\"></span>\n  </div>\n\n  <span ng-if=\"form.feedback !== false\"\n      class=\"form-control-feedback\"\n      ng-class=\"evalInScope(form.feedback) || {\'glyphicon\': true, \'glyphicon-ok\': hasSuccess(), \'glyphicon-remove\': hasError() }\"></span>\n\n  <span class=\"help-block\">{{ (hasError() && errorMessage(schemaError())) || form.description}}</span>\n</div>\n");}]);
 angular.module('schemaForm').directive('pickADate', function () {
 
   //String dates for min and max is not supported
@@ -108,14 +108,18 @@ angular.module('schemaForm').directive('pickADateTime', function () {
     },
     link: function (scope, element, attrs) {
       var momentDateTime = null;
+      var timeSet = false;
+      var dateSet = false;
 
       //Init
       if (scope.ngModel && moment(scope.ngModel).isValid()) {
         momentDateTime = moment(scope.ngModel);
         scope.pickADateTime.$$date = momentDateTime.format('YYYY-MM-DD');
         scope.pickADateTime.$$time = momentDateTime.format('HH:mm');
+        timeSet = true;
+        dateSet = true;
       } else {
-        momentDateTime = moment.hours('00').minutes('00');
+        momentDateTime = moment().hours('00').minutes('00');
       }
 
       scope.$watch('pickADateTime.$$date', function(value) {
@@ -126,7 +130,11 @@ angular.module('schemaForm').directive('pickADateTime', function () {
           .year(date.year())
           .month(date.month())
           .date(date.date());
-          scope.ngModel = momentDateTime.format('YYYY-MM-DDTHH:mm:ssZ');
+
+          dateSet = true
+          setDateTime()
+        } else {
+          clearBothValues()
         }
       })
 
@@ -134,9 +142,29 @@ angular.module('schemaForm').directive('pickADateTime', function () {
         if (value) {
           var time = value.split(':')
           momentDateTime.hours(time[0]).minutes(time[1]);
-          scope.ngModel = momentDateTime.format('YYYY-MM-DDTHH:mm:ssZ');
+          timeSet = true
+          setDateTime()
+        } else {
+          clearBothValues()
         }
       })
+
+      function clearBothValues() {
+        timeSet = false
+        dateSet = false
+        scope.ngModel = undefined
+        momentDateTime = moment().hours('00').minutes('00');
+        scope.pickADateTime.$$date = undefined
+        scope.pickADateTime.$$time = undefined
+        scope.$emit('schemaFormValidate')
+      }
+
+      function setDateTime() {
+        if (timeSet && dateSet) {
+          scope.ngModel = momentDateTime.format('YYYY-MM-DDTHH:mm:ssZ');
+        }
+        scope.$emit('schemaFormValidate')
+      }
     }
   };
 
